@@ -1,0 +1,35 @@
+# Secrets
+.env
+.env.*
+!.env.example
+.synthesis-credentials
+synthesis-register-payload.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Generated
+agent_log.json
+
+# IDE
+.vscode/
+*.swp
+*.swo
+.cursor/
+
+
+# OS
+.DS_Store
+Thumbs.db
+
+# AI DevKit
+.ai-devkit.json
+docs
+themes.md

@@ -1,0 +1,36 @@
+{
+  "name": "blockchain-skills-agent",
+  "version": "1.0.0",
+  "description": "Autonomous agent powered by portable blockchain skills for safe DeFi operations on Base",
+  "erc8004": {
+    "address": "0x0AD974Ef72eF6781ca3295Aa7b41682F95b1280d",
+    "chain": "base",
+    "operator": "0x0AD974Ef72eF6781ca3295Aa7b41682F95b1280d"
+  },
+  "skills": [
+    "SKILL-INDEX.md",
+    "skill-validate.md",
+    "skill-adapt.md",
+    "skill-debug.md"
+  ],
+  "capabilities": [
+    "portfolio-read",
+    "swap-validation",
+    "transaction-verification",
+    "failure-debugging",
+    "human-notification"
+  ],
+  "tools": [
+    "uniswap-trading-api",
+    "base-rpc"
+  ],
+  "safety": {
+    "maxTransactionValueUSD": 20,
+    "requireHumanApproval": "notify-only-above-threshold",
+    "guardrails": [
+      "skill-validate pre-tx checks",
+      "skill-debug failure handling",
+      "post-tx verification before receipts"
+    ]
+  }
+}
