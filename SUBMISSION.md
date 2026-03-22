@@ -73,7 +73,12 @@ Source files: `assets/*.png` and the same files under `docs/assets/` for GitHub 
 
 ### 3) Demo video (**required** on your checklist)
 
-We **cannot** host a compliant video only inside the repo (Synthesis expects a **video URL**). Record ~90s using **`docs/DEMO_VIDEO_SCRIPT.md`**, upload (**YouTube Unlisted** or **Loom**), then set **`videoURL`** to that link.
+Synthesis expects a **public video URL** (e.g. YouTube unlisted / Loom).
+
+- **Silent base for dubbing:** run **`./scripts/build_demo_silent_video.sh`** → **`demo/output/demo-silent-for-dub-1080p.mp4`** (~72s slideshow + silent audio). Add voiceover in any editor, export, upload. Details: **`demo/README.md`**.
+- **Or** screen-record live using **`docs/DEMO_VIDEO_SCRIPT.md`**.
+
+Then set **`videoURL`** via **`scripts/push_submission_media.py --video-url ...`**.
 
 ### 4) Push media fields to Synthesis (API)
 
