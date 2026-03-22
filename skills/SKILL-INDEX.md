@@ -39,7 +39,9 @@
 
 ## Synthesis hackathon context
 
-These skills are built for the [Synthesis](https://synthesis.md/) hackathon. The demo agent uses ERC-8004 identity (on Base Mainnet), references a checked-in `agent.json`, writes `agent_log.json` at runtime, and targets:
+These skills are built for the [Synthesis](https://synthesis.md/) hackathon. Official organizer docs (registration, submission, wallet, API notes): see **[`docs/reference/synthesis-official-skills.md`](../docs/reference/synthesis-official-skills.md)**.
+
+The demo agent uses ERC-8004 identity (on Base Mainnet), references a checked-in `agent.json`, writes `agent_log.json` at runtime, and targets:
 
 - **Protocol Labs** — "Let the Agent Cook" + "Agents With Receipts"
 - **Open Track** — cross-sponsor agent system

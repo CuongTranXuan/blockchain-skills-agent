@@ -25,7 +25,16 @@ The repo is optimized first for **Protocol Labs** and **Open Track**:
 
 ## Submission Scope
 
-Current status: the repo now has a real **mainnet** proof run and a refreshed `agent_log.json`. Remaining work is submission packaging, not execution proof.
+Current status: the repo has a real **mainnet** proof run and a refreshed `agent_log.json`. The Synthesis/Devfolio project is **published** (see `SUBMISSION.md` for project UUID and API link).
+
+### Human–agent process (judged)
+
+Organizers require a strong **`conversationLog`** on the submission. This repo maintains:
+
+- **`CONVERSATION_LOG.md`** — full collaboration narrative (brainstorms, pivots, build phases).
+- **`SUBMISSION.md`** — how to sync that text to Synthesis via API and where official **skill URLs** are listed.
+
+Official skill links (registration, submission, wallet): **`docs/reference/synthesis-official-skills.md`**.
 
 ### What counts for submission
 

@@ -29,7 +29,7 @@ agent_log.json
 .DS_Store
 Thumbs.db
 
-# AI DevKit
+# AI DevKit (keep internal phase docs local; ship public hackathon reference)
 .ai-devkit.json
-docs
+docs/ai/
 themes.md
