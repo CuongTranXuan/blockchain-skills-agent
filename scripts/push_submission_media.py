@@ -17,6 +17,19 @@ DEFAULT_DEPLOYED = "https://cuongtranxuan.github.io/blockchain-skills-agent/"
 RAW_BASE = "https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets"
 PROJECT_UUID = "98c345755ffc4b48b7e3b43ec7a017fd"
 
+# Order: cover + architecture + scenario showcases (Synthesis `pictures` is comma-separated URLs).
+PICTURE_FILENAMES = (
+    "submission-cover.png",
+    "submission-architecture.png",
+    "scenario-happy-path.png",
+    "scenario-blocked-path.png",
+    "scenario-failure-path.png",
+)
+
+
+def _pictures_field() -> str:
+    return ",".join(f"{RAW_BASE}/{name}" for name in PICTURE_FILENAMES)
+
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
@@ -44,11 +57,10 @@ def main() -> int:
         return 1
 
     cover = f"{RAW_BASE}/submission-cover.png"
-    arch = f"{RAW_BASE}/submission-architecture.png"
     payload: dict = {
         "deployedURL": args.deployed_url.rstrip("/") + "/",
         "coverImageURL": cover,
-        "pictures": f"{cover},{arch}",
+        "pictures": _pictures_field(),
     }
     if not args.no_video:
         if not args.video_url:

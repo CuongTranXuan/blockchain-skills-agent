@@ -101,6 +101,48 @@
       overflow: hidden;
     }
     .arch img { width: 100%; display: block; }
+    .scenarios {
+      margin-top: 2.5rem;
+    }
+    .scenarios > h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      margin: 0 0 1rem;
+    }
+    .scenario-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 700px) {
+      .scenario-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    figure.scenario {
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    figure.scenario img {
+      width: 100%;
+      display: block;
+      vertical-align: middle;
+    }
+    figure.scenario figcaption {
+      padding: 0.85rem 1rem 1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    figure.scenario figcaption strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+    }
     footer {
       margin-top: 3rem;
       text-align: center;
@@ -150,6 +192,37 @@ python3 -m venv .venv &amp;&amp; .venv/bin/pip install -r requirements.txt
     <div class="arch">
       <img src="assets/architecture.png" alt="Autonomous loop diagram: Discover through Log" width="1792" height="1024" />
     </div>
+
+    <section class="scenarios" aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading">Demo scenarios</h2>
+      <p style="color:var(--muted); margin:0 0 1.25rem; max-width:40rem;">
+        <strong>happy-path</strong> — real Base <strong>mainnet</strong> swap with receipts in <code>agent_log.json</code>.
+        <strong>blocked-path</strong> / <strong>failure-path</strong> — guardrails and error handling (typically rehearsed with <code>--dry-run</code> or simulated execution).
+      </p>
+      <div class="scenario-grid">
+        <figure class="scenario">
+          <img src="assets/scenario-happy-path.png" alt="happy-path: mainnet swap success" width="1792" height="1024" loading="lazy" />
+          <figcaption>
+            <strong>happy-path</strong>
+            Full loop through verify + log; mainnet ETH → USDC via Uniswap Trading API. Verify on BaseScan from the card above.
+          </figcaption>
+        </figure>
+        <figure class="scenario">
+          <img src="assets/scenario-blocked-path.png" alt="blocked-path: validation stops unsafe plan" width="1792" height="1024" loading="lazy" />
+          <figcaption>
+            <strong>blocked-path</strong>
+            Deterministic validation rejects the plan before broadcast — no tx sent.
+          </figcaption>
+        </figure>
+        <figure class="scenario">
+          <img src="assets/scenario-failure-path.png" alt="failure-path: execution error handling" width="1792" height="1024" loading="lazy" />
+          <figcaption>
+            <strong>failure-path</strong>
+            Simulated or real execution fault: structured log + human-visible notify path (<code>skill-debug</code>).
+          </figcaption>
+        </figure>
+      </div>
+    </section>
 
     <footer>
       Static demo page for judges · served from this repo’s <code>docs/</code> via GitHub Pages

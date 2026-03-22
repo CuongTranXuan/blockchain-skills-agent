@@ -63,9 +63,13 @@ After your latest commit is on **`master`**, these links are stable:
 | Field | URL |
 |--------|-----|
 | **coverImageURL** | `https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-cover.png` |
-| **pictures** (both images, comma-separated) | `https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-cover.png,https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-architecture.png` |
+| **pictures** (comma-separated; same order as `scripts/push_submission_media.py`) | Cover + architecture + **happy-path / blocked-path / failure-path** scenario visuals |
 
-Source files in repo: `assets/submission-cover.png`, `assets/submission-architecture.png` (also copied under `docs/assets/` for the static site).
+Full `pictures` string (after images are on `master`):
+
+`https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-cover.png,https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-architecture.png,https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/scenario-happy-path.png,https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/scenario-blocked-path.png,https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/scenario-failure-path.png`
+
+Source files: `assets/*.png` and the same files under `docs/assets/` for GitHub Pages (`docs/index.html` gallery).
 
 ### 3) Demo video (**required** on your checklist)
 
@@ -145,7 +149,7 @@ Checked against the live **Submission Checklist** (pre-publish + post-publish).
 | **`moltbookPostURL`** | **Missing** | Checklist expects a Moltbook post URL — [Moltbook skill](https://www.moltbook.com/skill.md). Add via project **update** when you have a post. |
 | **`deployedURL`** | **Set after Pages** | Use GitHub Pages from `/docs` → `https://cuongtranxuan.github.io/blockchain-skills-agent/` |
 | **`videoURL`** | **You upload** | Record using `docs/DEMO_VIDEO_SCRIPT.md`; set `DEMO_VIDEO_URL` and run the media snippet above. |
-| **`coverImageURL` / `pictures`** | **In repo** | `assets/submission-cover.png` + `assets/submission-architecture.png` (raw.githubusercontent URLs in section above). |
+| **`coverImageURL` / `pictures`** | **In repo** | Cover, architecture, + `scenario-happy-path.png`, `scenario-blocked-path.png`, `scenario-failure-path.png` — see table above. |
 | After publish: `status: publish` + listing | **Done** | Verified via public `GET /projects/...`. |
 | `commitCount` / commit timestamps | **May lag** | Re-push commits then **update** project (same `repoURL`) so metadata refreshes. |
 | **Tweet** tagging `@synthesis_md` | **Optional / recommended** | For visibility per skill doc. |
