@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blockchain Skills Agent — Synthesis demo</title>
+  <meta name="description" content="Portable blockchain skills + autonomous Base agent with ERC-8004, Uniswap, and structured receipts." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121a2f;
+      --text: #e8ecff;
+      --muted: #8b95b8;
+      --accent: #2dd4bf;
+      --accent2: #fbbf24;
+      --border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #1a2744 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    header p { color: var(--muted); margin: 0; max-width: 36rem; margin-inline: auto; }
+    .cover {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      margin-bottom: 2rem;
+    }
+    .cover img { width: 100%; display: block; vertical-align: middle; }
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.35rem;
+    }
+    .card h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+    }
+    .card ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+    .card li { margin: 0.35rem 0; }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      background: rgba(45, 212, 191, 0.12);
+      color: var(--text);
+    }
+    .btn.secondary { background: rgba(255,255,255,0.04); }
+    .btn:hover { filter: brightness(1.08); text-decoration: none; }
+    pre {
+      background: #070b14;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      color: #c4d0f5;
+    }
+    .arch {
+      margin-top: 2rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .arch img { width: 100%; display: block; }
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Blockchain Skills Agent</h1>
+      <p>Portable markdown skills + a Python autonomous loop on <strong>Base</strong> — discover, plan, validate, execute, verify, log. Built for <strong>Synthesis</strong> (Protocol Labs, Open Track, Uniswap).</p>
+    </header>
+
+    <div class="cover">
+      <img src="assets/cover.png" alt="Project cover — Blockchain Skills Agent" width="1792" height="1024" />
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Repository</h2>
+        <p style="margin:0 0 0.75rem; color:var(--muted); font-size:0.95rem;">Source, tests, <code>agent.json</code>, <code>skills/</code>, and runbook.</p>
+        <div class="cta">
+          <a class="btn" href="https://github.com/CuongTranXuan/blockchain-skills-agent" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Mainnet proof</h2>
+        <p style="margin:0 0 0.75rem; color:var(--muted); font-size:0.95rem;">Real Base swap via Uniswap Trading API (see <code>agent_log.json</code> in repo).</p>
+        <div class="cta">
+          <a class="btn" href="https://basescan.org/tx/0x50611f458c7533c461d0991e2e6315714c5991d119031783a60b3be80833a8db" target="_blank" rel="noopener">BaseScan tx →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Try locally</h2>
+      <pre><code>git clone https://github.com/CuongTranXuan/blockchain-skills-agent.git
+cd blockchain-skills-agent
+python3 -m venv .venv &amp;&amp; .venv/bin/pip install -r requirements.txt
+# configure .env from .env.example — never commit secrets
+.venv/bin/python -m agent.main --scenario happy-path --dry-run
+.venv/bin/python -m pytest tests/ -q</code></pre>
+    </div>
+
+    <div class="arch">
+      <img src="assets/architecture.png" alt="Autonomous loop diagram: Discover through Log" width="1792" height="1024" />
+    </div>
+
+    <footer>
+      Static demo page for judges · served from this repo’s <code>docs/</code> via GitHub Pages
+    </footer>
+  </div>
+</body>
+</html>

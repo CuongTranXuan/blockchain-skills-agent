@@ -42,6 +42,50 @@ curl -sS -X POST "https://synthesis.devfolio.co/projects/${PROJECT_UUID}" \
 
 If the API rejects a partial update, send the fields the skill allows for that endpoint, or use the Devfolio **web dashboard** for the same project and paste from `CONVERSATION_LOG.md`.
 
+## Live demo, cover image, screenshots, video (Synthesis form / API)
+
+### 1) Enable GitHub Pages (one-time)
+
+Repo: **`CuongTranXuan/blockchain-skills-agent`** · source: **`master`** · folder **`/docs`**.
+
+GitHub → **Settings** → **Pages** → **Build and deployment** → **Deploy from a branch** → Branch **`master`**, folder **`/docs`** → Save.
+
+After propagation, the live URL is:
+
+**`https://cuongtranxuan.github.io/blockchain-skills-agent/`**
+
+(Use this as **`deployedURL`** on Synthesis.)
+
+### 2) Cover + screenshots (hosted on `raw.githubusercontent.com`)
+
+After your latest commit is on **`master`**, these links are stable:
+
+| Field | URL |
+|--------|-----|
+| **coverImageURL** | `https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-cover.png` |
+| **pictures** (both images, comma-separated) | `https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-cover.png,https://raw.githubusercontent.com/CuongTranXuan/blockchain-skills-agent/master/assets/submission-architecture.png` |
+
+Source files in repo: `assets/submission-cover.png`, `assets/submission-architecture.png` (also copied under `docs/assets/` for the static site).
+
+### 3) Demo video (**required** on your checklist)
+
+We **cannot** host a compliant video only inside the repo (Synthesis expects a **video URL**). Record ~90s using **`docs/DEMO_VIDEO_SCRIPT.md`**, upload (**YouTube Unlisted** or **Loom**), then set **`videoURL`** to that link.
+
+### 4) Push media fields to Synthesis (API)
+
+From repo root (uses `HACKATHON_API_KEY` from `.env`):
+
+```bash
+# Images + live demo URL only (enable GitHub Pages first — see above)
+.venv/bin/python scripts/push_submission_media.py --no-video
+
+# After you upload a demo recording (see docs/DEMO_VIDEO_SCRIPT.md):
+export DEMO_VIDEO_URL="https://www.youtube.com/watch?v=YOUR_ID"
+.venv/bin/python scripts/push_submission_media.py --video-url "$DEMO_VIDEO_URL"
+```
+
+If you need to update **without** a video yet, use `--no-video` (some dashboards may still show “video required” until you run the second command).
+
 ## Submission Story
 
 - `testnet` is development-only and is not part of the final judging evidence
@@ -99,8 +143,9 @@ Checked against the live **Submission Checklist** (pre-publish + post-publish).
 | `helpfulResources` / `helpfulSkills` | **Done** | Present on published metadata. |
 | `intention` | **Done** | `continuing` + notes. |
 | **`moltbookPostURL`** | **Missing** | Checklist expects a Moltbook post URL — [Moltbook skill](https://www.moltbook.com/skill.md). Add via project **update** when you have a post. |
-| **`deployedURL`** | **Optional** | Not set; fine if no hosted demo. Add if you ship a live app. |
-| **`videoURL`** | **Optional** | Not set; **recommended** short walkthrough (demo + repo pointers). |
+| **`deployedURL`** | **Set after Pages** | Use GitHub Pages from `/docs` → `https://cuongtranxuan.github.io/blockchain-skills-agent/` |
+| **`videoURL`** | **You upload** | Record using `docs/DEMO_VIDEO_SCRIPT.md`; set `DEMO_VIDEO_URL` and run the media snippet above. |
+| **`coverImageURL` / `pictures`** | **In repo** | `assets/submission-cover.png` + `assets/submission-architecture.png` (raw.githubusercontent URLs in section above). |
 | After publish: `status: publish` + listing | **Done** | Verified via public `GET /projects/...`. |
 | `commitCount` / commit timestamps | **May lag** | Re-push commits then **update** project (same `repoURL`) so metadata refreshes. |
 | **Tweet** tagging `@synthesis_md` | **Optional / recommended** | For visibility per skill doc. |
