@@ -25,7 +25,7 @@
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
     header {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -42,8 +42,18 @@
       border: 1px solid var(--border);
       box-shadow: 0 20px 50px rgba(0,0,0,0.35);
       margin-bottom: 2rem;
+      background: #050810;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .cover img { width: 100%; display: block; vertical-align: middle; }
+    .cover img {
+      width: 100%;
+      max-height: min(52vw, 420px);
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
     .grid {
       display: grid;
       gap: 1rem;
@@ -99,8 +109,16 @@
       border-radius: 14px;
       border: 1px solid var(--border);
       overflow: hidden;
+      background: #050810;
     }
-    .arch img { width: 100%; display: block; }
+    .arch img {
+      width: 100%;
+      height: auto;
+      max-height: min(70vw, 480px);
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
     .scenarios {
       margin-top: 2.5rem;
     }
@@ -115,34 +133,94 @@
       display: grid;
       gap: 1.25rem;
       grid-template-columns: 1fr;
+      align-items: stretch;
     }
-    @media (min-width: 700px) {
+    @media (min-width: 900px) {
       .scenario-grid { grid-template-columns: repeat(3, 1fr); }
     }
-    figure.scenario {
+    article.term-card {
       margin: 0;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
     }
-    figure.scenario img {
-      width: 100%;
-      display: block;
-      vertical-align: middle;
-    }
-    figure.scenario figcaption {
+    article.term-card .term-cap {
       padding: 0.85rem 1rem 1rem;
       font-size: 0.88rem;
       color: var(--muted);
       border-top: 1px solid var(--border);
+      margin-top: auto;
     }
-    figure.scenario figcaption strong {
+    article.term-card .term-cap strong {
       display: block;
       color: var(--text);
       margin-bottom: 0.35rem;
       font-size: 0.95rem;
     }
+    .term {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: clamp(0.62rem, 1.35vw, 0.8125rem);
+      line-height: 1.5;
+      text-align: left;
+      -webkit-font-smoothing: antialiased;
+    }
+    .term-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.35);
+    }
+    .term-bar .dots { display: flex; gap: 0.35rem; }
+    .term-bar .dots span {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      opacity: 0.85;
+    }
+    .term-bar .dots span:nth-child(1) { background: #ff5f57; }
+    .term-bar .dots span:nth-child(2) { background: #febc2e; }
+    .term-bar .dots span:nth-child(3) { background: #28c840; }
+    .term-body {
+      padding: 0.75rem 0.85rem 1rem;
+      background: #030508;
+      color: #b8c5e0;
+      overflow-x: auto;
+      flex: 1;
+    }
+    .term-body .cmd { color: #8b95b8; margin-bottom: 0.65rem; word-break: break-all; }
+    .term-body .cmd::before { content: "$ "; color: #5c6b8a; }
+    .term-body .ok { color: #34d399; }
+    .term-body .warn { color: #fbbf24; }
+    .term-body .err { color: #f87171; }
+    .term-body .hi { color: #a78bfa; }
+    .term-body .dim { color: #64748b; }
+    .term-body pre {
+      margin: 0.5rem 0 0;
+      padding: 0.5rem 0.55rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: inherit;
+      line-height: inherit;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .term--happy .term-bar { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.25); }
+    .term--blocked .term-bar { color: #fcd34d; border-color: rgba(251, 191, 36, 0.25); }
+    .term--fail .term-bar { color: #fca5a5; border-color: rgba(248, 113, 113, 0.25); }
     footer {
       margin-top: 3rem;
       text-align: center;
@@ -195,32 +273,76 @@ python3 -m venv .venv &amp;&amp; .venv/bin/pip install -r requirements.txt
 
     <section class="scenarios" aria-labelledby="scenarios-heading">
       <h2 id="scenarios-heading">Demo scenarios</h2>
-      <p style="color:var(--muted); margin:0 0 1.25rem; max-width:40rem;">
-        <strong>happy-path</strong> — real Base <strong>mainnet</strong> swap with receipts in <code>agent_log.json</code>.
-        <strong>blocked-path</strong> / <strong>failure-path</strong> — guardrails and error handling (typically rehearsed with <code>--dry-run</code> or simulated execution).
+      <p style="color:var(--muted); margin:0 0 1.25rem; max-width:44rem;">
+        Sharp <strong>terminal mockups</strong> (HTML/CSS) — no upscaled PNGs. <strong>happy-path</strong> reflects the real Base <strong>mainnet</strong> proof; <strong>blocked-path</strong> / <strong>failure-path</strong> show guardrails and error handling.
       </p>
       <div class="scenario-grid">
-        <figure class="scenario">
-          <img src="assets/scenario-happy-path.png" alt="happy-path: mainnet swap success" width="1792" height="1024" loading="lazy" />
-          <figcaption>
+        <article class="term-card">
+          <div class="term term--happy">
+            <div class="term-bar">
+              <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              happy-path · mainnet
+            </div>
+            <div class="term-body">
+              <div class="cmd">python -m agent.main --network mainnet --scenario happy-path</div>
+              <div><span class="ok">[OK]</span> discover → portfolio loaded</div>
+              <div><span class="ok">[OK]</span> plan → ETH → USDC (Uniswap quote)</div>
+              <div><span class="ok">[OK]</span> validate → limits &amp; chain checks passed</div>
+              <div><span class="ok">[OK]</span> execute → tx broadcast</div>
+              <div><span class="ok">[OK]</span> verify → receipt matches intent</div>
+              <div><span class="ok">[OK]</span> log → agent_log.json</div>
+              <div class="ok" style="margin-top:0.65rem;">SUCCESS · tx confirmed</div>
+              <div class="dim">0.005 ETH → USDC · Base</div>
+              <div class="dim">tx 0x5061…a8db → BaseScan</div>
+            </div>
+          </div>
+          <div class="term-cap">
             <strong>happy-path</strong>
-            Full loop through verify + log; mainnet ETH → USDC via Uniswap Trading API. Verify on BaseScan from the card above.
-          </figcaption>
-        </figure>
-        <figure class="scenario">
-          <img src="assets/scenario-blocked-path.png" alt="blocked-path: validation stops unsafe plan" width="1792" height="1024" loading="lazy" />
-          <figcaption>
+            Full autonomous loop with real mainnet execution and structured receipts. Use the BaseScan link above to verify.
+          </div>
+        </article>
+
+        <article class="term-card">
+          <div class="term term--blocked">
+            <div class="term-bar">
+              <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              blocked-path · dry-run
+            </div>
+            <div class="term-body">
+              <div class="cmd">python -m agent.main --scenario blocked-path --dry-run</div>
+              <div><span class="warn">STATUS</span> simulation · validation gate</div>
+              <pre><span class="warn">VALIDATION</span> plan rejected
+<span class="dim">reason:</span> exceeds safety limits (slippage / notional / allow-list)
+<span class="dim">action:</span> execution skipped — no transaction broadcast</pre>
+              <div class="ok" style="margin-top:0.65rem;">Guardrails worked as intended.</div>
+            </div>
+          </div>
+          <div class="term-cap">
             <strong>blocked-path</strong>
-            Deterministic validation rejects the plan before broadcast — no tx sent.
-          </figcaption>
-        </figure>
-        <figure class="scenario">
-          <img src="assets/scenario-failure-path.png" alt="failure-path: execution error handling" width="1792" height="1024" loading="lazy" />
-          <figcaption>
+            Deterministic <code>validate</code> stops unsafe plans before signing. Rehearse with <code>--dry-run</code>.
+          </div>
+        </article>
+
+        <article class="term-card">
+          <div class="term term--fail">
+            <div class="term-bar">
+              <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              failure-path · demo
+            </div>
+            <div class="term-body">
+              <div class="cmd">python -m agent.main --scenario failure-path</div>
+              <div><span class="ok">[OK]</span> validate passed (intent allowed)</div>
+              <div><span class="err">[ERR]</span> execute → simulated_failure</div>
+              <div><span class="hi">[LOG]</span> agent_log.json updated (step + error)</div>
+              <div><span class="warn">[NOTIFY]</span> human escalation recommended</div>
+              <pre><span class="dim">skill-debug:</span> classify · summarize · next steps</pre>
+            </div>
+          </div>
+          <div class="term-cap">
             <strong>failure-path</strong>
-            Simulated or real execution fault: structured log + human-visible notify path (<code>skill-debug</code>).
-          </figcaption>
-        </figure>
+            Execution fault path with structured logging and <code>skill-debug</code>-style human notification (demo scenario).
+          </div>
+        </article>
       </div>
     </section>
 
