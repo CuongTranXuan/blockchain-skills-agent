@@ -36,7 +36,7 @@ Organizers require a strong **`conversationLog`** on the submission. This repo m
 
 Official skill links (registration, submission, wallet): **`docs/reference/synthesis-official-skills.md`**.
 
-**Live demo page (judges):** enable **GitHub Pages** from branch **`master`** / folder **`docs`**, then open **`https://cuongtranxuan.github.io/blockchain-skills-agent/`** — see **`SUBMISSION.md`** for cover image URLs and how to sync `videoURL` to Synthesis.
+**Live demo page (judges):** enable **GitHub Pages** from branch **`master`** / folder **`docs`**, then open **`https://cuongtranxuan.github.io/blockchain-skills-agent/`** — includes **happy-path / blocked-path / failure-path** scenario visuals. See **`SUBMISSION.md`** for image URLs and how to sync `videoURL` to Synthesis.
 
 ### What counts for submission
 
